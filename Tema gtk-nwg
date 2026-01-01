@@ -1,0 +1,22 @@
+Instalar en Arch
+yay -S nwg-look
+
+Repositorios
+https://github.com/nwg-piotr/nwg-look
+
+gestiona y personaliza temas wayland gtk
+
+Instalar temas
+  se pueden instalar temas usando gestores de paquetes como pacman o yay u otro
+    sudo pacman -S adw-gtk3-dark
+    yay -S adw-gtk3-dark
+
+  Instalacion manual
+    clonar repo con git clone
+    entrar a la carpeta del tema
+    ejecutar archivo para compilar, ej: makepkg -si (ver repositorio de tema para instalacion manual)
+    
+Sugerencias
+
+reiniciar app luego de instalar un tema para que el tema aparezca listado
+aplicar tema antes de salir de app
