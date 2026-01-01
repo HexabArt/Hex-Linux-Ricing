@@ -1,0 +1,48 @@
+Instalar en Arch
+yay -S matugen-bin
+
+Repositorios
+1> https://github.com/InioX/matugen/tree/main
+2> https://github.com/InioX/matugen-themes
+
+matugen no escribe en disco hasta que tu crees los archivos de configuracion y templates
+
+directorios a crear
+mkdir ~/.config/matugen
+mkdir ~/.config/matugen/templates (sugerencia: usar mkdir -p ~/.config/matugen/templates para crear tanto matugen/ como templates/ a la vez)
+
+archivos a crear
+vim ~/.config/matugen/config.toml (archivo de configuracion de matugen)
+vim ~/.config/matugen/templates/<cualquier-nombre>.<extension-adecuada-al-programa>
+
+ejemplo
+vim ~/.config/matugen/templates/gtk-colors.css
+la extension y templates sugeridos para cada app pueden encontrarse en el repositorio 2 matugen-themes/templates/
+copiar contenido del template sugerido en el repositorio al archivo dentro de la carpeta template
+
+config.toml
+hay un codigo sugerido en el repositorio 1 matugen/example/config.toml
+
+  Modificaciones
+    comentar linea 32 si no se va a ocupar la importacion de json
+
+    [config.wallpaper] para setear un wallpaper y obtener paleta a la vez
+      el seteo de wallpaper va a depender de la app usada, yo ocupo "awww" y el formato que ocupo es este:
+        command = "awww"
+        arguments= ["img", "--transition-type", "random", "--transition-fps", "120"]
+      
+        #120 es 120hz ya que mi pantalla es 144hz pero no necesito los 144hz para fluida la animacion de transicion de wallpaper
+
+    [templates.name1]
+      la ruta input puede ser relativa, es decir que se va a interpretar desde la ubicacion del archivo config.toml
+      input_path = "templates/gtk-colors.css" #esta ruta es relativa a la ubicacion de config.toml
+      la ruta output es el archivo de la app que va a recibir los colores, eso depende de cada app por ejemplo para tema gtk-3.0
+      output_path = "~/.config/gtk-3.0/gtk.css" #esta ruta es absoluta
+
+Comandos
+
+obtener paleta de colores y, si se ha seteado en config.toml, tambien setear nuevo wallpaper
+matugen image /ruta/imagen.x
+
+comprobar si la paleta se esta generando y las exportaciones van bien
+matugen image /ruta/imagen.x -d
