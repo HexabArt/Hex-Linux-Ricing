@@ -1,0 +1,31 @@
+Instalar en Arch
+yay -S awww
+
+Repositorio
+https://codeberg.org/LGFae/awww/src/branch/main
+
+proceso para correr awww
+awww-daemon
+
+script para correr awww al iniciar sesion
+  crear carpeta en ubicacion arbitratia
+    mkdir ~/scripts/awww_script.sh
+
+  ejemplo del contenido del script
+    #!/bin/bash
+
+    # Ruta al directorio con imágenes
+    DIR=~/dotfiles/backgrounds
+
+    # Seleccionar un archivo al azar (filtrando por extensiones comunes)
+    FILE=$(find "$DIR" -type f \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.gif" -o -iname "*.mp4" -o -iname "*.webm" \) | shuf -n 1)
+
+    # Poner el wallpaper con awww
+    awww img "$FILE"
+
+Comandos
+
+awww img "/ruta/imagen.x" -t <transicion>
+
+  transicion puede ser simple, fade, random, etc, ver repositorio
+  -t es --transition-type
