@@ -1,0 +1,40 @@
+Instalar
+yay -S python-pywalfox
+
+Requisitos
+Firefox o un fork de firefox instalado
+Python (version 2.7.X or 3.X)
+extension pywalfox en firefox
+
+Repositorios
+1> https://github.com/frewacom/pywalfox?tab=readme-ov-file
+2> https://github.com/InioX/matugen-themes?tab=readme-ov-file#pywalfox
+
+Directorios a crear
+mkdir ~/.cache/wal/ #si no tienes pywal instalado, yo uso matugen por eso lo creo
+
+Archivos a crear
+vim ~/.config/matugen/templates/<cualquier-nombre>.json
+
+Hay un archivo .json ya definido en los templates de matugen (repositorio 2)
+
+Modificaciones
+~/.config/matugen/config.toml
+
+ Ejemplo:
+
+  [templates.pywalfox]
+  input_path = "templates/pywalfox-colors.json"
+  output_path = "~/.cache/wal/colors.json"       #este es el archivo que pywalfox ocupara para tematizar firefox, lo crea matugen
+  post_hook = "pywalfox update"                  #ejecuta pywalfox update para actualizar los colores de firefox
+
+Comandos
+
+pywalfox install
+  este comando crea la comunicacion entre el sistema y firefox y pone el daemon en la carpeta bin para actualizar los colores
+  el daemon es main.sh y necesita permisos, si pywalfox install no es capaz de darle permisos, hacerlo manualmente asi:
+
+ejemplo de mi ruta:
+sudo chmod +x /usr/lib/python3.13/site-packages/pywalfox/bin/main.sh
+
+matugen image /ruta/imagen.x #genera paleta y cambia colores en firefox
