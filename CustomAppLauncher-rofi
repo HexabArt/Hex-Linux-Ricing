@@ -1,0 +1,186 @@
+Instalar
+yay -S rofi
+
+Repositorios
+1> https://github.com/davatorium/rofi
+2> https://github.com/InioX/matugen-themes?tab=readme-ov-file#rofi
+
+Archivos a crear
+
+rofi no genera su archivo config por default, se puede generar ejecutando estos comandos
+
+mkdir -p ~/.config/rofi #crear carpeta para rofi
+
+rofi -dump-config > ~/.config/rofi/config.rasi #crear archivo de config y depositar la config default de rofi
+
+vim ~/.config/matugen/templates/rofi-colors.rasi
+
+hay un template de ejemplo en el repositorio 2, copiar todo el contenido
+sugerencia: para hacer rofi transparente agregar el valor hex siguiente al final de cada color:
+20% = 33
+40% = 66
+60% = 99
+80% = cc
+
+ejemplo:  
+primary: {{colors.primary.default.hex}}cc; #cc es 80%, eso se agregara al valor del color y rofi lo entendera como valor de transparencia para ese color
+
+Modificaciones
+vim ~/.config/matugen/config/toml
+
+[templates.rofi]
+input_path = "templates/rofi-colors.rasi"
+output_path = "~/.config/rofi/<nombre-paleta-rofi>.rasi"
+
+GENERAR PALETA DE MATUGEN 1 VEZ
+
+vim ~/.config/rofi/config.rasi
+agregar hasta arriba:
+@import = "<nombre-paleta-rofi>.rasi"
+
+agregar configuracion de tema hasta el final del codigo:
+
+/* ==========================================================
+   Rofi theme
+   Base: gruvbox-light
+   Colors: Matugen (Material You)
+   ========================================================== */
+
+* {
+    /* Text */
+    font: "monospace 11";
+    highlight: bold italic;
+
+    /* Base colors */
+    background:              @surface;
+    foreground:              @on-surface;
+    bordercolor:             @outline;
+
+    /* Normal */
+    normal-background:       @surface;
+    normal-foreground:       @on-surface;
+    alternate-normal-background: @surface-container;
+    alternate-normal-foreground: @on-surface;
+
+    /* Selected */
+    selected-normal-background: @primary-container;
+    selected-normal-foreground: @on-primary-container;
+
+    /* Active */
+    active-background:       @secondary-container;
+    active-foreground:       @on-secondary-container;
+    alternate-active-background: @surface-container-high;
+    alternate-active-foreground: @on-surface;
+    selected-active-background:  @secondary;
+    selected-active-foreground:  @on-secondary;
+
+    /* Urgent */
+    urgent-background:       @error-container;
+    urgent-foreground:       @on-error-container;
+    alternate-urgent-background: @error-container;
+    alternate-urgent-foreground: @on-error-container;
+    selected-urgent-background:  @error;
+    selected-urgent-foreground:  @on-error;
+
+    /* UI elements */
+    separatorcolor:          @outline-variant;
+    scrollbar-handle:        @outline;
+
+    /* Window */
+    window-background:       @surface-container;
+    window-border-color:     @outline;
+}
+
+/* ==========================================================
+   Layout
+   ========================================================== */
+
+window {
+    width: 600;
+    height: 400;
+    background-color: @surface-container;
+    border: 2px;
+    border-color: @outline;
+    padding: 2px;
+}
+
+mainbox {
+    background-color: transparent;
+    spacing: 2px;
+}
+
+inputbar {
+    background-color: @surface-container-high;
+    text-color: @on-surface;
+    padding: 6px;
+    border-radius: 4px;
+}
+
+prompt {
+    text-color: @primary;
+}
+
+entry {
+    text-color: @on-surface;
+}
+
+listview {
+/*mosaico*/
+    layout: vertical;
+    columns: 3;
+    lines: 3;
+    spacing: 2px; 
+    fixed-height: true;
+    background-color: transparent;
+    scrollbar: true;
+}
+
+element {
+    background-color: transparent;
+    text-color: @on-surface;
+    orientation: vertical;
+    padding: 0px;
+    margin: 0px;
+    spacing: 0px;
+    min-height: 190px;
+    border-radius: 10px;
+}
+
+element normal.normal {
+    background-color: @surface;
+}
+
+element normal.selected {
+    background-color: @primary-container;
+    text-color: @on-primary-container;
+}
+
+element active.normal {
+    background-color: @secondary-container;
+    text-color: @on-secondary-container;
+}
+
+element urgent.normal {
+    background-color: @error-container;
+    text-color: @on-error-container;
+}
+
+element-text {
+/*quitar nombre de imagenes*/
+    enabled: false; 
+    background-color: transparent;
+    text-color: inherit;
+}
+
+element-icon {
+/*tamano de iconos*/
+    size: 175px; 
+    background-color: transparent;
+    horizontal-align: 0.5;
+    vertical-align: 0.5;
+}
+
+scrollbar {
+    handle-color: @outline;
+    background-color: @surface-container-low;
+}
