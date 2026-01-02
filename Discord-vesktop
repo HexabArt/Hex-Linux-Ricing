@@ -1,0 +1,23 @@
+instalar
+yay -S vesktop
+
+Enlace
+https://vesktop.dev/
+
+Directorios a crear
+mkdir -p ~/.config/vesktop/themes
+
+Archivos a crear
+vim ~/.config/matugen/templates/vesktop-colors.css
+
+Modificaciones
+
+vim ~/.config/matugen/config.toml
+
+[templates.vesktop]
+input_path = "templates/vesktop-colors.css"
+output_path = "~/.config/vesktop/themes/midnight-discord.css"
+
+Asegurarse de tener discord en apariencia dark
+
+Ir a temas de vencord y aplicar el tema midnight-discord
