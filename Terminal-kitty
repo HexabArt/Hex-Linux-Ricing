@@ -1,0 +1,24 @@
+Instalar
+Sudo pacman -S kitty
+
+Repositorios
+1> https://sw.kovidgoyal.net/kitty/
+2> https://github.com/InioX/matugen-themes?tab=readme-ov-file#kitty
+3> https://github.com/InioX/matugen-themes/blob/main/templates/kitty-colors.conf
+
+Directorio a crear
+mkdir ~/.config/kitty/themes
+
+Archivos a crear
+vim ~/.config/matugen/templates/kitty-colors.conf
+    hay un template de matugen para kitty en el repositorio 3
+
+Modificaciones
+   vim ~/.config/matugen/config.toml
+      [templates.kitty]
+      input_path = "templates/kitty-colors.conf"
+      output_path = "~/.config/kitty/themes/theme-matugen.conf"
+      post_hook = 'pkill -SIGUSR1 kitty'
+
+  vim ~/.config/kitty/kitty.conf
+      include themes/theme-matugen.conf #cambiar el include original por la ruta del tema output generado por matugen
