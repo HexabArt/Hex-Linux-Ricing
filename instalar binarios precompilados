@@ -1,0 +1,49 @@
+ejemplo, instalar helix editor de texto
+
+verificar tipo de arquitectura del sistema
+uname -m
+
+la mia es x86_64
+
+ir al repositorio
+https://github.com/helix-editor/helix/releases
+repositorio guia para instalar 
+https://helix-editor.vercel.app/start-here/installation
+
+aarch64-* → ARM (Raspberry Pi, Apple Silicon, etc.)
+
+*-macos* → macOS
+
+*-windows* → Windows
+
+*.deb → Debian / Ubuntu
+
+*-source* → código fuente (para compilar)
+
+*.AppImage* → funciona, pero no es instalación nativa Archs
+
+archivo correcto para mi sistema:
+helix-25.07.1-x86_64-linux.tar.xz
+
+descargar y descomprimir archivo
+tar -xf helix-25.07.1-x86_64-linux.tar.xz
+dentro se encuentran estos archivos
+contrib   runtime   hx   license   readme
+
+reubicar el script hx a una carpeta del $PATH para que el sistema lo reconozca
+
+echo $PATH
+muestra las rutas incluidas en PATH
+
+por ejemplo mover el archivo hx a /usr/local/bin
+
+sudo cp helix-25.07.1-x86_64-linux.tar.xz /usr/local/bin
+
+segun las instrucciones de la guia de instalacion tambien hay que mover la carpeta runtime al directorio
+donde hx busca runtime que por default es ~/.config/helix/
+
+mkdir ~/.config/helix
+
+mv -r runtime ~/.config/helix
+
+ahora ya se puede ejecutar el comando desde la terminal
