@@ -1,0 +1,92 @@
+Instalar
+Sudo pacman -S hyprlock
+
+Archivos a crear
+vim ~/.config/hypr/hyprlock.conf
+  #formato sencillo con input password y reloj
+source = $HOME/.config/hypr/colors.conf #importar paleta de colores generada por matugen
+
+$font = JetBrainsMono Nerd Font
+
+# GENERAL
+general {
+    disable_loading_bar = true
+    hide_cursor = true
+}
+
+# BACKGROUND
+background {
+    monitor =
+    path = $image #ruta de imagen seleccionada por el script wswitcher
+    blur_passes = 2
+    color = 93000a33
+}
+
+# TIME
+label {
+    monitor =
+    text = cmd[update:30000] echo "$(date +"%R")"
+    color = $primary
+    font_size = 90
+    font_family = $font
+    position = -30, 0
+    halign = right
+    valign = top
+}
+
+# DATE 
+label {
+    monitor = 
+    text = cmd[update:43200000] echo "$(date +"%A, %d %B %Y")"
+    color = $primary
+    font_size = 25
+    font_family = $font
+    position = -30, -150
+    halign = right
+    valign = top
+}
+
+# USER AVATAR
+
+image {
+    monitor = 
+    path = ~/.face
+    size = 100
+    border_color = $on_surface
+
+    position = 0, 75
+    halign = center
+    valign = center
+}
+
+# INPUT FIELD
+input-field {
+    monitor =
+    size = 300, 60
+    outline_thickness = 4
+    dots_size = 0.2
+    dots_spacing = 0.2
+    dots_center = true
+    outer_color = $on_surface
+    inner_color = $outline_variant
+    font_color = $on_surface
+    fade_on_empty = false
+    placeholder_text = 󰌾 Logged in as $USER
+    hide_input = false
+    check_color = $tertiary_container
+    fail_color = $error
+    fail_text = <i>$FAIL <b>($ATTEMPTS)</b></i>
+    capslock_color = $tertiary
+    position = 0, -35
+    halign = center
+    valign = center
+}
+
+Modificaciones
+
+vim ~/.config/matugen/config.toml
+
+[templates.hyprland]
+input_path = "templates/hyprland-colors.conf"
+output_path = "~/.config/hypr/colors.conf"
+post_hook = "hyprctl reload"
