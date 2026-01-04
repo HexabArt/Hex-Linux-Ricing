@@ -14,7 +14,9 @@ Archivos a crear
 
 
 
-  vim ~/.local/bin<script-seleccion-imagen> #no hace falta que tenga extension .sh en linux
+  vim ~/.local/bin/wswitcher #no hace falta que tenga extension .sh en linux
+#!/bin/bash
+
 #!/bin/bash
 
 # Directory containing wallpapers
@@ -29,11 +31,14 @@ cd "$WALL_DIR" || exit
 IFS=$'\n'
 
 # Grab the user-selected wallpaper
-SELECTED_WALL=$(for a in *.jpg *.png; do echo -en "$a\0icon\x1f$a\n" ; done | rofi -dmenu -p "" -show-icons -theme ~/.config/rofi/themes/<tema-rofi>.rasi)
+SELECTED_WALL=$(for a in *.jpg *.png; do echo -en "$a\0icon\x1f$a\n" ; done | rofi -dmenu -p "" -show-icons -theme ~/.config/rofi/themes/template.rasi)
+
+#Armar ruta completa para que $IMAGE contenga esta ruta en wswitcher-backend
+FULL_PATH="$WALL_DIR/$SELECTED_WALL"
 
 # If not empty, pass to walset-backend
 if [ -n "$SELECTED_WALL" ]; then
-    /ruta/absoluta/script-aplicar-tema "$SELECTED_WALL"
+    ~/.local/bin/wswitcher-backend "$FULL_PATH" #se ejecuta el script y se le pasa $FULL_PATH como primer argumento $1
 fi
 
 # Go back to where you came from
@@ -43,7 +48,7 @@ cd "$CWD" || exit
 
 
 
-  vim ~/.local/bin<script-aplicar-tema> #no hace falta que tenga extension .sh en linux
+  vim ~/.local/bin/wswitcher-backend #no hace falta que tenga extension .sh en linux
 #!/bin/bash
 
 # Check if the user provided an argument
@@ -52,35 +57,24 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
-IMAGE="$1"
+IMAGE="$1" #FULL_PATH de script wswitcher
 
 # Send notification to the user
 notify-send "Changing Theme" "Applying new wallpaper and updating colors, please wait until confirmation..."
 
 # Set wallpaper
-# swww img "$IMAGE" --transition-type="center" --transition-step=1 --transition-fps="60"
-
-# Generate pywal colors
-# wal -i "$IMAGE" -n -s -t -e
-
-# Make nvim use pywal colors
-# python3 /home/user0/.config/nvim/pywal/chadwal.py
-
-# Refresh Spotify
-# pywal-spicetify Dribbblish
+#awww img "$IMAGE" --transition-type="random" --transition-duration=1.5 --transition-fps="144"
 
 # Use Matugen to generate Material You colors
 matugen image "$IMAGE"
-
-# Refresh waybar
-# pkill waybar
-# waybar > /dev/null 2>&1 &
 
 # Refresh swaync
 pkill swaync
 swaync > /dev/null 2>&1 &
 
 notify-send "Theme Applied" "Wallpaper and theme updated successfully!"
+
+
 
 
 
