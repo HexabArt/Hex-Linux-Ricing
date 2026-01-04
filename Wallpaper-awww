@@ -9,7 +9,8 @@ awww-daemon
 
 script para correr awww al iniciar sesion
   crear carpeta en ubicacion arbitratia
-    mkdir ~/scripts/awww_script.sh
+    mkdir ~/scripts
+    vim ~/scripts/awww_script.sh
 
   ejemplo del contenido del script
     #!/bin/bash
