@@ -1,0 +1,9 @@
+Instalar
+wl-clipboard
+sudo pacman -S wl-clipboard
+
+Repositorios
+1> https://github.com/rolv-apneseth/clipvault
+
+Instalar clipvault
+Descargar archivo comprimido para el sistema, descomprimir y copiar el ejecutable a una carpeta de $PATH
