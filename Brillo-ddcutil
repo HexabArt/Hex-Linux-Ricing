@@ -1,0 +1,17 @@
+Instalar
+sudo pacman -S ddcutil 
+
+archivos a crear
+
+sudo nvim /etc/modules-load.d/i2c-dev.conf
+  i2c-dev
+
+comandos
+ddcutil detect
+ddcutil getvcp 10 #consulta brillo actual
+ddcutil setvcp 10 <valor-entre-0-y-100>
+
+binds
+bind = $mainMod, N, exec, ddcutil setvcp 10 0
+bind = $mainMod, H, exec, ddcutil setvcp 10 100
+
