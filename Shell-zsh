@@ -1,0 +1,6 @@
+Instalar zsh
+sudo pacman -S zsh
+
+comandos
+cambiar a shell zsh para este usuario
+chsh -s $(which zsh)
