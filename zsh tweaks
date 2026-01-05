@@ -1,0 +1,16 @@
+Instalar
+sudo pacman -S zsh-autosuggestions
+sudo pacman -S zsh-syntax-highlighting
+sudo pacman -S zsh-history-substring-search
+
+Modificaciones
+
+vim .zshrc
+
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#A6ADC8'  # Cambia color de texto autosugerido
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+la ruta donde esten estos plugins puede cambiar, poner la ruta al plugin
+
