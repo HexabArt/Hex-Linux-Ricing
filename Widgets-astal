@@ -1,0 +1,10 @@
+Instalar
+ags
+yay -S aylurs-gtk-shell-git
+astal
+yay -S libastal-meta
+
+Directorios a crear
+mkdir -p .config/ags/widget
+
+descargar y ubicar archivos de ejemplo de ags
