@@ -1,0 +1,80 @@
+Instalar
+sudo pacman -S neovim
+yay -S python-pywal16 #libreria python
+yay -S python-watchdog #libreria python
+
+Instalar Nvchad
+git clone https://github.com/NvChad/starter ~/.config/nvim && nvim #dejar que lazy instale todo y salir presionando q
+correr este comando en la consola de nvim> :MasonInstallAll #salir presionando q
+borrar el folder git descargado en la carpeta nvim
+
+navegar a ~/.config/nvim y ejecutar comando
+git clone https://github.com/NvChad/pywal
+
+
+Repositorios
+https://nvchad.com/docs/quickstart/install
+
+Modificaciones
+~/.config/nvim/init.lua
+
+PONER ESTE CODIGO AL FINAL DE INIT.LUA:
+
+--habilita RGB completo, muchos mas colores
+vim.opt.termguicolors = true
+
+-- matugen
+os.execute("python ~/.config/nvim/pywal/chadwal.py &> /dev/null &")
+
+local autocmd = vim.api.nvim_create_autocmd
+
+autocmd("Signal", {
+  pattern = "SIGUSR1",
+  callback = function()
+    require('nvchad.utils').reload()
+  end
+})
+
+
+
+vim ~/.config/matugen/config.toml
+
+#colors nvim
+[templates.nvim]
+input_path = "~/.config/nvim/pywal/matugen.lua"
+output_path = "~/.cache/wal/base46-dark.lua"
+
+[templates.nvimlight]
+input_path = '~/.config/nvim/pywal/matugen.lua'
+output_path = '~/.cache/wal/base46-light.lua'
+
+[config.custom_colors.red]
+color = "#FF0000"
+blend = true
+
+[config.custom_colors.green]
+color = "#00FF00"
+blend = true
+
+[config.custom_colors.yellow]
+color = "#FFFF00"
+blend = true
+
+[config.custom_colors.blue]
+color = "#0000FF"
+blend = true
+
+[config.custom_colors.magenta]
+color = "#FF00FF"
+blend = true
+
+[config.custom_colors.cyan]
+color = "#00FFFF"
+blend = true
+
+[config.custom_colors.white]
+color = "#FFFFFF"
+blend = true
+
+
+dentro de nvim presionar spacebar luego th para seleccionar temas y elegir "chadwal" este tema actualiza los colores
