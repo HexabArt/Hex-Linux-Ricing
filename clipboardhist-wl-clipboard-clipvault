@@ -8,5 +8,10 @@ Repositorios
 Instalar clipvault
 Descargar archivo comprimido para el sistema, descomprimir y copiar el ejecutable a una carpeta de $PATH
 
+Modificaciones
+vim ~/.config/hypr/hyprland.conf
+
+exec-once = wl-paste --watch clipvault store
+
 hacer bind en hyprland.conf
 bind = $mainMod, V, exec, clipvault list | rofi -dmenu -display-columns 2 | clipvault get | wl-copy
