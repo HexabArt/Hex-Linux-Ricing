@@ -9,7 +9,6 @@ gestiona y personaliza temas wayland gtk
 Instalar temas
   se pueden instalar temas usando gestores de paquetes como pacman o yay u otro
     sudo pacman -S adw-gtk3-dark
-    yay -S adw-gtk3-dark
 
   Instalacion manual
     clonar repo con git clone
