@@ -77,4 +77,5 @@ color = "#FFFFFF"
 blend = true
 
 
-dentro de nvim presionar spacebar luego th para seleccionar temas y elegir "chadwal" este tema actualiza los colores
+paso final:
+generar paleta de colores con matugen, cerrar nvim y luego dentro de nvim presionar spacebar luego th para seleccionar temas y elegir "chadwal" este tema actualiza los colores
