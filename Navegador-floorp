@@ -1,0 +1,29 @@
+yay -S floorp
+
+no poner la barra de direcciones en la parte de abajo porque no permite instalar extensiones o temas ya que el popup no es capaz de salir entonces falla
+
+Personalizar con archivo .css
+
+Lugares para buscar temas
+
+https://firefoxcss-store.github.io/
+https://www.reddit.com/r/FirefoxCSS/?tl=es
+
+el tema puede venir comprimido, necesitamos un archivo userChrome.css 
+
+Habilitar profile customizations stylesheet:
+
+en la barra de floorp: 
+about:config
+toolkit.legacyUserProfileCustomizations.stylesheets true (doble click para setear en true)
+
+Localizar carpeta de perfil de usuario en floorp
+about:support
+
+Buscar Profile Directory, el mio es:
+~/.floorp/8bwjgrim.default-default
+
+dentro debe haber una carpeta llamada "chrome" si no, crearla
+ubicar userChrome.css del tema aqui
+
+
