@@ -1,0 +1,83 @@
+Descargar una iso de sistema operativo windows
+Descargar drivers Virtio iso: 
+  https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md
+
+comandos:
+sudo pacman -S qemu qemu-full virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables-nft libguestfs
+sudo pacman -S swtpm
+sudo systemctl enable --now libvirtd
+sudo usermod -aG libvirt {user_name}
+sudo systemctl restart libvirtd
+
+Reiniciar sistema
+
+archivos a editar:
+sudo vim /etc/libvirt/network.conf
+
+cambia: # firewall_backend = "nftables"
+a: firewall_backend = "iptables"
+
+ejecutar: sudo systemctl restart libvirtd
+
+
+
+Configurar entorno virtual
+
+Iniciar virtual-manager
+
+en kvm virtual-manager entrar en preferencias y habilitar xml editing
+Dar click a icono de monitor para crear una nueva maquina
+seleccionar la iso de windows en su ubicacion
+si no se detecta el sistema automaticamente, escribirlo y seleccionar una opcion
+setear cantidad de ram y nucleos
+setear cantidad de almacenamiento, ruta estandar o ruta personalizada en un folder sin restricciones
+checkear la casilla "customize configuration before install"
+click en finalizar
+dirigirse a la seccion de cpu/topology y setear manualmente socket, cores y threads para la maquina virtual
+verificar que este activado copy host cpu configuration, aplicar
+dirigirse a sata disk 1 y cambiar disk bus a Virtio, opciones avanzadas/cache mode: writeback, aplicar
+add hardware. device type: disk device, seleccionar ruta a iso Virtio, finalizar
+NIC, cambiar device model a Virtio, aplicar
+tpm/advance options/version: 2.0 aplicar
+add hardware/rng, finish
+overview/xml, modificar xml con estas lineas de codigo:
+
+REEMPLAZAR
+<hyperv mode="custom">
+  <relaxed state="on"/>
+  <vapic state="on"/>
+  <spinlocks state="on" retries="8191"/>
+  <vpindex state="on"/>
+  <runtime state="on"/>
+  <synic state="on"/>
+  <stimer state="on">
+    <direct state="on"/>
+  </stimer>
+  <reset state="on"/>
+  <vendor_id state="on" value="KVM Hv"/>
+  <frequencies state="on"/>
+  <reenlightenment state="on"/>
+  <tlbflush state="on"/>
+  <ipi state="on"/>
+</hyperv>
+
+
+REEMPLAZAR, NO BORRAR LINEA DE TOPOLOGY
+<cpu mode="host-passthrough" check="none" migratable="on">
+  <feature policy="require" name="svm"/>
+</cpu>
+
+REEMPLAZAR SOLO SI NO COINCIDE
+<clock offset="localtime">
+  <timer name="rtc" tickpolicy="catchup"/>
+  <timer name="pit" tickpolicy="delay"/>
+  <timer name="hpet" present="no"/>
+  <timer name="hypervclock" present="yes"/>
+</clock>
+
+add hardware/channel/name:org.qemu.guest_agent.0, finalizar
+begin installation
+iniciar instalador de windows y detenerse en la seleccion de disco donde se instalara windows
+load driver/browse/cd virtio/viostor/w11/amd64  #driver de disco, seleccionar e instalar
+load driver/browse/cd virtio/NetkVM/w11/amd64  #driver de red, seleccionar e instalar
+seleccionar espacio libre en disco e instalar windows
