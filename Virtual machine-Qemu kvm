@@ -81,3 +81,56 @@ iniciar instalador de windows y detenerse en la seleccion de disco donde se inst
 load driver/browse/cd virtio/viostor/w11/amd64  #driver de disco, seleccionar e instalar
 load driver/browse/cd virtio/NetkVM/w11/amd64  #driver de red, seleccionar e instalar
 seleccionar espacio libre en disco e instalar windows
+
+Dentro de windows
+
+Instalar virtio-win-gues-tools, esta dentro del cd vitio al final, next a todo
+en la ventana donde se esta emulando windows dar click a view/scale display: never y encende auto resize vm with windows, opcional poner windows en fullscreen
+apagar maquina virtual y eliminar tanto disco virtio como disco del iso windows, ya no se necesitan
+
+
+optimizaciones
+
+Desactivar sysmain
+win + R : services.msc
+detener el servicio y setear inicio a disabled
+
+Desactivar busqueda web
+win + R : regedit
+HKEY_CURRENT_USER/software/policies/microsoft/windows
+click derecho a windows/new/key nombrar "Explorer" a la nueva key
+dentro de explorer crear una nueva key dword 32-bit, nombrarla DisableSearchBoxSuggestions, doble click y setear valor a 1
+Reiniciar windows
+
+remover anuncios y recomendaciones
+personalizacion/start, deshabilitar basura
+personalizacion/lockscreen. deshabilitar basura
+personalizacion/taskbar, deshabilitar basura
+privacidad y seguridad/recomandaciones y ofertas, deshabilitar basura
+
+Deshabilitar useplatformclock
+
+win + x/ terminal con admin permission
+bcdedit /enum
+bcdedit /deletevalue useplatformclock #si el valor no esta listado, ya esta todo correcto, skipear
+reiniciar windows
+
+desactivar tareas automaticas
+win + R/taskschd.msc
+task scheduler/microsoft/windows y deshabilitar: 
+autochk/proxy disable
+customer experience improvement program/consolidator disable y tambien usbceip
+diskdiagnostic/Microsoft-Windows-DiskDiagnosticDataCollector disable
+Maps/MapsToastTask y MapsUptadeTask disable
+RetailDemo/CleanupOfflineContent disable
+Windows error recording/Queue reporting disable
+
+Deshabilitar programas de inicio innecesario
+
+ctrl + shift + scape para abrir task manager
+ir a apps que inician con el sistema y desactivar basura
+
+Quitar efectos en windows
+win + R/sysdm.cpl
+advance/performance/settings/adjust for best performance
+rehabilitar show thumbnails,show windows content while dragging,smooth edges of screens fonts
