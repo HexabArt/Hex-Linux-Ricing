@@ -1,0 +1,44 @@
+Documentacion
+  https://wiki.cachyos.org/es/features/cachy_chroot/
+
+En el caso de que windows se instale posterior a una instalacion de linux, windows modificara el arrancador para darse prioridad, esto arruina la config de Grub
+
+entrar en un live usb, por ejemplo cachyoslive
+
+en cachyoslive para cambiar a root se ejecuta:
+sudo su
+
+luego usar la herramienta cachy-chroot:
+verificar que se esta usando la ultima version:
+  pacman -Sy cachy-chroot
+
+  cachy-chroot
+
+ahora seleccionar la particion donde esta la raiz del sistema /root
+
+y a todo, cuando pregunte por montar particiones extra, decir n
+
+ahora nos encontramos en el entorno chroot:
+
+[root@CachyOS /]#
+
+Reinstalar GRUB:
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=CachyOS
+
+Generar el menu de GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
+
+para detectar windows
+
+instalar os-probar:
+sudo pacman -S os-prober
+
+Editar archivo grub descomentando la linea
+sudo vim /etc/default/grub
+  
+GRUB_DISABLE_OS_PROBER=false
+
+regenerar grub  
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+Reiniciar sistema
