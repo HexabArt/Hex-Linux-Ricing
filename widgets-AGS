@@ -1,0 +1,15 @@
+instalar
+yay -S aylurs-gtk-shell-git
+sudo pacman -S nodejs npm
+npm install -g sass
+sudo pacman -S upower
+sudo pacman -S bluez bluez-utils
+
+comandos
+habilitar servicio bluez:
+sudo systemctl enable bluetooth.service
+sudo systemctl start bluetooth.service
+
+generar template de entorno typescript con ags
+ags init -d /path/to/project
+"project" es la NUEVA carpeta donde se creara el proyecto, darle nombre
