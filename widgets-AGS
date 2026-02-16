@@ -5,6 +5,10 @@ npm install -g sass
 sudo pacman -S upower
 sudo pacman -S bluez bluez-utils
 
+Repositorios
+https://aylur.github.io/ags/guide/quick-start.html
+https://github.com/Aylur/ags/tree/main/examples/gtk4/simple-bar
+
 comandos
 habilitar servicio bluez:
 sudo systemctl enable bluetooth.service
@@ -13,3 +17,25 @@ sudo systemctl start bluetooth.service
 generar template de entorno typescript con ags
 ags init -d /path/to/project
 "project" es la NUEVA carpeta donde se creara el proyecto, darle nombre
+
+Modificaciones
+en el archivo de ejemplo bar.tsx se toman en cuenta una pc con varios monitores, si solo se tiene un monitor se puede eliminar la funcion onCleanup() y tambien 
+se puede nombrar la window asi:
+
+    <window
+      $={(self) => (win = self)}
+      visible
+      name="bar"
+      class="Bar"
+      gdkmonitor={gdkmonitor}
+      exclusivity={Astal.Exclusivity.EXCLUSIVE}
+      anchor={TOP | LEFT | RIGHT}
+      application={app}
+    >
+esto se hace para evitar conflictos al modificar colores y estilos en el archivo css
+
+
+Cuando se cree el entorno de typescript, se creara un archivo app.ts pero en el ejemplo de AGS es un archivo app.tsx, hay que cambiar el nombre de app.ts a app.tsx y en tsconfig
+del proyecto hay que cambiar el parametro para habilitar el uso de archivos tsx:
+
+ "allowJs": true,
